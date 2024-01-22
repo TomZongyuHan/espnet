@@ -44,11 +44,9 @@ class S3prlFrontend(AbsFrontend):
             s3prl.util.download.set_dir(download_dir)
 
         assert frontend_conf.get("upstream", None) in S3PRLUpstream.available_names()
-        # TODO: 将path_or_url中的None删除，使其可以正常获取写在yaml文件中的frontend本地路径
-        # path_or_url=frontend_conf.get("path_or_url", None), 
         upstream = S3PRLUpstream(
             frontend_conf.get("upstream"),
-            path_or_url=frontend_conf.get("path_or_url"),
+            path_or_url=frontend_conf.get("path_or_url", None),
             normalize=frontend_conf.get("normalize", False),
             extra_conf=frontend_conf.get("extra_conf", None),
         )
