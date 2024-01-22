@@ -45,7 +45,7 @@ class S3prlFrontend(AbsFrontend):
 
         assert frontend_conf.get("upstream", None) in S3PRLUpstream.available_names()
         # TODO: 将path_or_url中的None删除，使其可以正常获取写在yaml文件中的frontend本地路径
-        # path_or_url=frontend_conf.get("path_or_url", None),
+        # path_or_url=frontend_conf.get("path_or_url", None), 
         upstream = S3PRLUpstream(
             frontend_conf.get("upstream"),
             path_or_url=frontend_conf.get("path_or_url"),
