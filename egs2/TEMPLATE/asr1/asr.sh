@@ -571,7 +571,8 @@ log "Skipped stages: ${skip_stages}"
 if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ] && ! [[ " ${skip_stages} " =~ [[:space:]]1[[:space:]] ]]; then
     log "Stage 1: Data preparation for data/${train_set}, data/${valid_set}, etc."
     # [Task dependent] Need to create data.sh for new corpus
-    local/data.sh ${local_data_opts}
+    # TODO: 新增传入了lang变量
+    local/data.sh ${lang} ${local_data_opts}
 fi
 
 
