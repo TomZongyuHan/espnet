@@ -1,5 +1,28 @@
 #!/usr/bin/env bash
 
+'''
+# Data Related
+1. Data preparation
+2. Speed perturbation
+3. Generate dump folder
+4. Removal of long / short data
+5. Input / Output Token list generation
+
+# LM Related
+6. LM statistics collection
+7. LM training
+8. LM perplexity
+9. Ngram-LM training
+
+# ASR Model Related
+10. ASR statistics collection
+11. ASR training
+12. ASR inference
+13. ASR scoring
+
+# Others
+14-16. (Optional) Pack results for upload
+'''
 # Set bash to 'debug' mode, it will exit on :
 # -e 'error', -u 'undefined variable', -o ... 'error in pipeline', -x 'print commands',
 set -e
@@ -571,7 +594,8 @@ log "Skipped stages: ${skip_stages}"
 if [ ${stage} -le 1 ] && [ ${stop_stage} -ge 1 ] && ! [[ " ${skip_stages} " =~ [[:space:]]1[[:space:]] ]]; then
     log "Stage 1: Data preparation for data/${train_set}, data/${valid_set}, etc."
     # [Task dependent] Need to create data.sh for new corpus
-    local/data.sh ${local_data_opts}
+    # TODO: 新增传入了lang变量
+    local/data.sh ${lang} ${local_data_opts}
 fi
 
 
