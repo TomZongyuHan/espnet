@@ -1,0 +1,47 @@
+# network architecture
+encoder: wav2vec2
+encoder_conf:
+    output_size: 512 # 如果是768，则压根不会收敛，loss很难收敛；目前512还是不错的，这个值就暂定了！
+    w2v_url: https://huggingface.co/TencentGameMate/chinese-wav2vec2-base/blob/main/chinese-wav2vec2-base-fairseq-ckpt.pt
+    w2v_dir_path: /newdisk/espnet_exp/espnet_pretrained_models/huggingface_model/wav2vec2_base_wenetspeech
+    normalize_before: True
+    freeze_finetune_updates: 0
+
+# hybrid CTC/attention
+model_conf:
+    ctc_weight: 1.0
+    lsm_weight: 0.1
+    length_normalized_loss: false
+ctc_conf:
+    ignore_nan_grad: true
+
+# minibatch related
+batch_type: folded
+batch_size: 24
+
+# optimization for adapter-tuning
+grad_clip: 5
+max_epoch: 100
+patience: 30
+optim: adam
+optim_conf:
+    lr: 0.0001
+    weight_decay: 0.00001
+scheduler: CosineAnnealingLR
+scheduler_conf:
+    T_max: 100
+    eta_min: 0.0000001
+
+# 是否采用混合精度训练
+use_amp: true
+
+# plot related
+use_matplotlib: true
+num_att_plot: 0 # 默认为3
+
+# model selection
+best_model_criterion:
+-  - valid
+   - loss
+   - min
+keep_nbest_models: 10

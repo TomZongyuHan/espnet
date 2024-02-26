@@ -257,7 +257,7 @@ def main():
                 for line in tqdm(fscp):
                     uttid, wavpath = line.strip().split(None, 1)
                     # TODO: 添加了文件的根目录
-                    wavpath = "/newdisk/data/KeSpeech/"+wavpath
+                    # wavpath = "/newdisk/data/KeSpeech/"+wavpath
                     # B.a. Without segments and using pipe inputs
                     if wavpath.endswith("|"):
                         if args.multi_columns_input:
